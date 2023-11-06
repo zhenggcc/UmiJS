@@ -23,7 +23,11 @@
     "@ant-design/pro-layout": "^6.5.0",
     "react": "17.x",
     "react-dom": "17.x",
+<<<<<<< HEAD
     "umi": "^3.5.41"
+=======
+    "umi": "^3.5.0"
+>>>>>>> 2edf8ff (UmiJS3 学习中)
   },
   "devDependencies": {
     "@types/react": "^17.0.0",
