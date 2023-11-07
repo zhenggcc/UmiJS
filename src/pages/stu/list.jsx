@@ -1,81 +1,65 @@
-import { Space, Table, Tag } from 'antd';
-import React from 'react';
+import { Space, Table, Tag, Button } from 'antd';
+import React,{useState,useEffect} from 'react';
+import {stuGet, stuDelete} from '@/api/stu'
 
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    render: text => <a>{text}</a>,
-  },
-  {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-    key: 'address',
-  },
-  {
-    title: 'Tags',
-    key: 'tags',
-    dataIndex: 'tags',
-    render: (_, { tags }) => (
-      <>
-        {tags.map(tag => {
-          let color = tag.length > 5 ? 'geekblue' : 'green';
-          if (tag === 'loser') {
-            color = 'volcano';
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: (_, record) => (
-      <Space size="middle">
-        <a>Invite {record.name}</a>
-        <a>Delete</a>
-      </Space>
-    ),
-  },
-];
 
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-    tags: ['nice', 'developer'],
-  },
-  {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-    tags: ['loser'],
-  },
-  {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-    tags: ['cool', 'teacher'],
-  },
-];
+
+// const data = [ //测试数据，非响应式
+//   {
+//     key: '1',
+//     name: 'John Brown',
+//     score: 89,
+//     city: '黄冈',
+//     time: '2000-02-01'
+//   }
+// ];
 
 export default function StuList() {
+  let [data,setData] = useState([])
+  const columns = [
+    {
+      title: '姓名',
+      dataIndex: 'name',
+      key: 'name',
+      render: text => <a>{text}</a>,
+    },
+    {
+      title: '分数',
+      dataIndex: 'score',
+      key: 'score',
+    },
+    {
+      title: '城市',
+      dataIndex: 'city',
+      key: 'city',
+    },
+    {
+      title: '生日',
+      key: 'time',
+      dataIndex: 'time',
+    },
+    {
+      title: '操作',
+      key: 'action',
+      render: (text, record, index) => (
+        <Space size="middle">
+          <Button type='primary' size='small'>编辑</Button>
+          <Button type='primary' danger size='small' onClick={()=>{
+            stuDelete(text.objectId).then(res=>{
+              data.splice(index, 1);
+              setData([...data]);
+            })
+          }}>删除</Button>
+        </Space>
+      ),
+    },
+  ];
+  useEffect(()=>{
+    stuGet().then(res=>{
+      setData(res.data)
+    })
+  },[])
   return (
-    <Table columns={columns} dataSource={data} />
+    <Table columns={columns} dataSource={data} rowKey='objectId' />
   )
 }
