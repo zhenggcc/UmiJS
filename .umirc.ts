@@ -25,27 +25,41 @@ export default defineConfig({
   theme: {
     // '@primary-color': '#1DA57A',
   },
-  // routes: [
-  //   { path: '/', component: '@/pages/index' },
-  //   { path: '/list', redirect: '@/pages/user/one' },
-  //   {
-  //     path: '/user',
-  //     // exact: true,
-  //     component: '@/layouts/index',
-  //     wrappers: [
-  //       '@/wrappers/auth'
-  //     ],
-  //     routes: [
-  //       /*
-  //       * :id 为路由组件参数  :id? 为动态路由 id可以传也可以不传
-  //       */
-  //       { path: '/user/one/:id?', component: '@/pages/index', title: '用户页面一' },
-  //       { path: '/user/two', component: '@/pages/user', title: '用户页面二' },
-  //       { component: '@/pages/404' }
-  //     ]
-  //   },
-  //   { component: '@/pages/404' }
-  // ],
+  mfsu: {},
+  routes: [
+    // { path: '/', component: '@/pages/index' },
+    {
+      path: '/',
+      component: '@/layouts/index',
+      routes: [
+        { path: '/', component: '@/pages/index' },
+        {
+          path: '/user',
+          wrappers: ['@/wrappers/auth'],
+          routes: [
+            /*
+             * :id 为路由组件参数  :id? 为动态路由 id可以传也可以不传
+             * match，当前路由和 url match 后的对象，包含 params、path、url 和 isExact 属性
+             */
+            // { path: '/user/one/:id?', component: '@/pages/user/one', title: '用户页面一' },
+            {
+              path: '/user/one',
+              component: '@/pages/user/one',
+              title: '用户页面一',
+            },
+            {
+              path: '/user/two',
+              component: '@/pages/user/two',
+              title: '用户页面二',
+            },
+            { component: '@/pages/404' },
+          ],
+        },
+        { component: '@/pages/404' },
+      ],
+    },
+    { component: '@/pages/404' },
+  ],
   // routes: [{ path: '/', component: '@/pages/index',title: '首页' }],
   fastRefresh: {},
 });
