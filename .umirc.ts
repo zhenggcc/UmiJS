@@ -30,7 +30,7 @@ export default defineConfig({
     // { path: '/', component: '@/pages/index' },
     {
       path: '/',
-      component: '@/layouts/index',
+      // component: '@/layouts/index',
       routes: [
         { path: '/', component: '@/pages/index' },
         {
@@ -55,6 +55,17 @@ export default defineConfig({
             { component: '@/pages/404' },
           ],
         },
+        {
+          path: '/dva',
+          routes: [
+            {
+              path: '/dva/index',
+              component: '@/pages/dva/index',
+              title: 'dva首页',
+            },
+            { component: '@/pages/404' },
+          ],
+        },
         { component: '@/pages/404' },
       ],
     },
@@ -62,4 +73,13 @@ export default defineConfig({
   ],
   // routes: [{ path: '/', component: '@/pages/index',title: '首页' }],
   fastRefresh: {},
+  // mock: false
+  // mock:{
+  //   /**
+  //    * exclude，格式为 Array(string)，用于忽略不需要走 mock 的文件
+  //    */
+  //   exclude:[
+  //     ''
+  //   ]
+  // }
 });

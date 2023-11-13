@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "start": "umi dev",
+    "start_none_mock": "MOCK=none umi dev",
     "build": "umi build",
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
@@ -32,6 +33,7 @@
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.5.41",
     "lint-staged": "^10.0.7",
+    "mockjs": "^1.1.0",
     "prettier": "^2.2.0",
     "typescript": "^4.1.2",
     "yorkie": "^2.0.0"
