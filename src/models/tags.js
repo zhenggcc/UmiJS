@@ -1,8 +1,4 @@
-import { request } from 'umi';
-
-const getTags = () => {
-  return request('/api/tags');
-};
+import { getTags } from '@/services/tags';
 
 export default {
   /**
