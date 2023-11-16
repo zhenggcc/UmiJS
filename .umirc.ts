@@ -36,6 +36,7 @@ export default defineConfig({
         {
           path: '/user',
           wrappers: ['@/wrappers/auth'],
+          component: '@/pages/user',
           routes: [
             /*
              * :id 为路由组件参数  :id? 为动态路由 id可以传也可以不传
@@ -62,6 +63,16 @@ export default defineConfig({
               path: '/dva/index',
               component: '@/pages/dva/index',
               title: 'dva首页',
+            },
+            { component: '@/pages/404' },
+          ],
+        },
+        {
+          path: '/login',
+          routes: [
+            {
+              path: '/login/index',
+              component: '@/pages/login/index',
             },
             { component: '@/pages/404' },
           ],
